@@ -17,7 +17,7 @@ for line in input:
     # continue?
     # print(line)
 
-print(elves)
+print(max(elves))
 
 # compare values in list, find biggest value (max)
 
