@@ -8,8 +8,24 @@ tranform letter into priority value (a-z: 1-26, A-Z: 27-52)
 calculate sum of priorities
 """
 
-test = "HelloWorld"
+test = "HeLLoWörLd"
+
 halfIndex = int(len(test)/2)
 # print(int(len(test)/2))
-print(test[:halfIndex])
-print(test[halfIndex:])
+compt1 = test[:halfIndex]
+compt2 = test[halfIndex:]
+itemtype = ""
+
+print(compt1)
+print(compt2)
+
+for item1 in compt1:
+    for item2 in compt2:
+        if item1 == item2:
+            print("Found")
+            itemtype = item1
+            break
+        else:
+            continue
+
+print(itemtype)
