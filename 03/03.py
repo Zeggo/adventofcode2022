@@ -14,7 +14,6 @@ itemtypes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 itemtype = ""
 
 prio_sum = 0
-found = False
 
 for line in input:
 
@@ -27,6 +26,8 @@ for line in input:
     print(compt2)
 
     for item1 in compt1:
+        found = False
+
         for item2 in compt2:
 
             if item1 == item2:
@@ -35,11 +36,7 @@ for line in input:
                 print(itemtype)
                 break
 
-            else:
-                continue
-
         if found == True:
-            found = False
             break
 
     for i in range(len(itemtypes)):
