@@ -8,8 +8,10 @@ tranform letter into priority value (a-z: 1-26, A-Z: 27-52)
 calculate sum of priorities
 """
 
-#input = open(r"03/input3.txt", encoding="utf-8")
-input = ["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg", "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw"]
+input_file = open(r"03/input3.txt", encoding="utf-8")
+input = input_file.readlines()
+input_file.close()
+#input = ["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg", "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw"]
 
 prio_sum = 0
 
@@ -63,7 +65,8 @@ for i in range(0, len(input), 3):
                 for item3 in input[i+2]:
                     if item1 == item3:
                         found = True
-                        print(item1)
+                        badge_sum += find_prio(item1)
+                        #print(item1)
                         break
 
             if found == True:
@@ -72,6 +75,4 @@ for i in range(0, len(input), 3):
         if found == True:
             break
 
-
-
-#input.close()
+print("Part 2:", badge_sum)
