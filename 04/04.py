@@ -27,12 +27,13 @@ for line in input:
     #print(ass1)
     #print(ass2)
 
-    # Comparing if one set fully contains the other
+    # Part 1: Comparing if one set fully contains the other
     if ass1.issubset(ass2) or ass2.issubset(ass1):
         duplicate_assignments += 1
-
+    
+    # Part 2: Compare if there are overlaps
     if not(ass1.isdisjoint(ass2)):
         overlapping_assignments +=1
 
-print(duplicate_assignments)
-print(overlapping_assignments)
+print("Part 1:", duplicate_assignments)
+print("Part 2:", overlapping_assignments)
