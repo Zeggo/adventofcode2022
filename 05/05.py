@@ -47,13 +47,13 @@ for step in procedure:
         stacks[step[1]-1].pop()
         print(stacks[step[1]-1])
 
-    crane.reverse()
-    print("Reversed crane:", crane)
+    #Part 1: crane.reverse()
+    #Part 1: print("Reversed crane:", crane)
     stacks[step[2]-1].extend(crane)
     # step[0] how many, from step[1] to step[2].
     # [1] => stacks[step[1]][-(step[0]):] => crane to [2] => stacks[step[2]].append(crane)
 
-part_1_answer = ""
+answer = ""
 for stack in stacks:
-    part_1_answer += stack[-1]
-print(part_1_answer)
+    answer += stack[-1]
+print(answer)
