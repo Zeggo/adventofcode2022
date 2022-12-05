@@ -29,7 +29,7 @@ input_file.close()
 # columns in same places -> placement to list name
 # row -> placement in list, at the end => add new items to [0], not replacing previous items
 
-# Take a symbol (crate) every x characters in string and add to list[0] if it is whitespace, ignore
+# Take a symbol (crate) every x characters in string and add to list if it is a letter
 stacks = list(([],[],[],[],[],[],[],[],[]))
 
 for row in range(len(crates)):
@@ -39,4 +39,21 @@ for row in range(len(crates)):
             stacks[stack_index].insert(0, crates[row][column])
         stack_index += 1
 
-print(stacks)
+for step in procedure:
+    #print(step)
+    crane = stacks[step[1]-1][-(step[0]):]
+    print("Crane:", crane)
+    for i in range(step[0]):
+        stacks[step[1]-1].pop()
+        print(stacks[step[1]-1])
+
+    crane.reverse()
+    print("Reversed crane:", crane)
+    stacks[step[2]-1].extend(crane)
+    # step[0] how many, from step[1] to step[2].
+    # [1] => stacks[step[1]][-(step[0]):] => crane to [2] => stacks[step[2]].append(crane)
+
+part_1_answer = ""
+for stack in stacks:
+    part_1_answer += stack[-1]
+print(part_1_answer)
