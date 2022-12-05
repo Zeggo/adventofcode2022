@@ -21,7 +21,7 @@ for line in input_file:
 
 input_file.close()
 
-print(crates[0])
+#print(crates[0])
 #print("\n\n\nBREAK HERE\n\n\n")
 #print(procedure)
 
@@ -29,11 +29,14 @@ print(crates[0])
 # columns in same places -> placement to list name
 # row -> placement in list, at the end => add new items to [0], not replacing previous items
 
-# Take a symbol every x characters in string and add to list[0] if it is whitespace, ignore
+# Take a symbol (crate) every x characters in string and add to list[0] if it is whitespace, ignore
 stacks = list(([],[],[],[],[],[],[],[],[]))
 stack_index = 0
-for index in range(1, len(crates[0]), 4):
-    stacks[stack_index].append(crates[0][index])
+
+
+for crate_index in range(1, len(crates[0]), 4):
+    if crates[0][crate_index] != " ":
+        stacks[stack_index].insert(0, crates[0][crate_index])
     stack_index += 1
 
 print(stacks)
