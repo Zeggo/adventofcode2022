@@ -31,12 +31,12 @@ input_file.close()
 
 # Take a symbol (crate) every x characters in string and add to list[0] if it is whitespace, ignore
 stacks = list(([],[],[],[],[],[],[],[],[]))
-stack_index = 0
 
-
-for crate_index in range(1, len(crates[0]), 4):
-    if crates[0][crate_index] != " ":
-        stacks[stack_index].insert(0, crates[0][crate_index])
-    stack_index += 1
+for row in range(len(crates)):
+    stack_index = 0
+    for column in range(1, len(crates[row]), 4):
+        if crates[row][column].isalpha(): #crates[row][column] != " " or 
+            stacks[stack_index].insert(0, crates[row][column])
+        stack_index += 1
 
 print(stacks)
