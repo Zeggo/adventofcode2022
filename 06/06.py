@@ -7,11 +7,11 @@ input_file.close()
 
 def find_unique_set(set_length, input):
     last_set = ""
-    for char in range(set_length, len(input)):
-        last_set = input[char - set_length:char]
+    for i in range(set_length, len(input)):
+        last_set = input[i - set_length:i]
         #print(last_set)
         if len(set(last_set)) == len(last_set):
-            return char
+            return i
 
 print("Part 1: The start-of-packet marker is at location", find_unique_set(4, input))
 print("Part 2: The start-of-message marker is at location", find_unique_set(14, input))
