@@ -27,10 +27,14 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k"""
-input = test_input.split("\n")
+#input = test_input.split("\n")
 #print(input)
 
-
+input_file = open(r"07/input7.txt", encoding="utf-8")
+input = input_file.readlines()
+input_file.close()
+for i in range(len(input)):
+    input[i] = input[i].rstrip()
 
 # Create Dir class
 # - has a name and upper directory
