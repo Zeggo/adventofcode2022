@@ -150,5 +150,27 @@ for dir in all_dirs:
     if dir.calculate_total_size() <= max_size:
         sum_of_small_dirs_sizes += dir.calculate_total_size()
 
+# Part 1 solution:
 print("The sum of sizes of small directories is:", sum_of_small_dirs_sizes)
 
+# Part 2:
+# Find the smallest directory to delete for freeing up enough space
+# Find the total size of that directory
+
+disk_space = 70_000_000
+update_size = 30_000_000
+
+unused_space = disk_space - root.calculate_total_size()
+required_space = update_size - unused_space
+print("Currently unused space:", unused_space)
+print("Still required space:", required_space)
+
+smallest_dir_to_delete = root
+for dir in all_dirs:
+    dir_size = dir.calculate_total_size()
+    if dir_size >= required_space: # The directory needs to be at least as big as the still required space
+        if dir_size < smallest_dir_to_delete.calculate_total_size(): # Find the smallest suitable directory
+            smallest_dir_to_delete = dir
+
+# Part 2 solution:            
+print("The smallest directory to delete says:", smallest_dir_to_delete)
