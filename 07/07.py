@@ -3,8 +3,8 @@
 # Determine the total size of each directory
 # Find the directories with a total size of max. 100 000
 # Find the sum of the total sizes of those directories
-"""
-Test input = ""$ cd /
+
+test_input = """$ cd /
 $ ls
 dir a
 14848514 b.txt
@@ -26,14 +26,37 @@ $ ls
 4060174 j
 8033020 d.log
 5626152 d.ext
-7214296 k""
-"""
+7214296 k"""
+input = test_input.split("\n")
+print(input)
 
 # Create Dir class
 # - has a name
 # - includes files with names and sizes
 # - includes directories with total sizes
 # - calculate total size of directory
+class Dir:
+    def __init__(self, name, files) -> None:
+        self.name = name
+        self.files = files
+
+    def calculate_total_size(self):
+        total_size = 0
+        for file in files:
+            total_size += file["size"]
+
+        print("Total size:", total_size)
+
+# Create file dictionary
+# Has a name as a string and a size as int
+def create_file(filename, filesize):
+    file = {
+        "name": filename,
+        "size": filesize
+        }
+    return file
+
+files = []
 
 # Parse input:
 # $ = command
@@ -45,3 +68,8 @@ $ ls
 #       => create files
 #       dir x -> directory object, name
 #       int y -> file size, name
+
+for line in input:
+    if line[0] == "$": # is command
+        if line[2:3] == "cd":
+            pass
