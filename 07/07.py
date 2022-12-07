@@ -28,24 +28,31 @@ $ ls
 5626152 d.ext
 7214296 k"""
 input = test_input.split("\n")
-print(input)
+#print(input)
 
 # Create Dir class
-# - has a name
+# - has a name and upper directory
 # - includes files with names and sizes
 # - includes directories with total sizes
 # - calculate total size of directory
 class Dir:
-    def __init__(self, name, files) -> None:
+    def __init__(self, name, parent) -> None:
         self.name = name
-        self.files = files
+        self.parent = parent
+        self.children = []
+        self.files = []
+
+    def __str__(self) -> str:
+        return self.name
 
     def calculate_total_size(self):
         total_size = 0
-        for file in files:
+        for file in self.files:
             total_size += file["size"]
+        for child in self.children:
+            total_size += child.calculate_total_size()
 
-        print("Total size:", total_size)
+        return total_size
 
 # Create file dictionary
 # Has a name as a string and a size as int
@@ -55,8 +62,6 @@ def create_file(filename, filesize):
         "size": filesize
         }
     return file
-
-files = []
 
 # Parse input:
 # $ = command
@@ -69,7 +74,34 @@ files = []
 #       dir x -> directory object, name
 #       int y -> file size, name
 
+upper_dir = None
+current_dir = None
+
 for line in input:
+    
     if line[0] == "$": # is command
-        if line[2:3] == "cd":
+        print(line[2:3+1])
+        if line[2:3+1] == "cd": # change directory
+            print("cd")
+            if line[5] == "/": # root
+                root = Dir("root", None)
+                current_dir = root
+            
+            elif line[5:6+1] == "..": # out
+                current_dir = upper_dir
+                if upper_dir == root: upper_dir.parent = None
+                else: upper_dir = upper_dir.parent
+
+            else: # in
+                upper_dir = current_dir
+                for dir in upper_dir.children:
+                    if line[5:] == dir.name:
+                        current_dir = dir
+
+        elif line[2:3+1] == "ls":
             pass
+
+        print(current_dir)
+    
+    else:
+        pass
