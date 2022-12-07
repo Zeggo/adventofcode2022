@@ -30,6 +30,8 @@ $ ls
 input = test_input.split("\n")
 #print(input)
 
+
+
 # Create Dir class
 # - has a name and upper directory
 # - includes files with names and sizes
@@ -43,7 +45,7 @@ class Dir:
         self.files = []
 
     def __str__(self) -> str:
-        return self.name
+        return f"I am directory {self.name} and my size is {self.calculate_total_size()}."
 
     def calculate_total_size(self):
         total_size = 0
@@ -76,6 +78,7 @@ def create_file(filename, filesize):
 
 upper_dir = None
 current_dir = None
+all_dirs = []
 
 for line in input:
     
@@ -85,6 +88,7 @@ for line in input:
             
             if line[5] == "/": # root
                 root = Dir("root", None)
+                all_dirs.append(root)
                 current_dir = root
             
             elif line[5:6+1] == "..": # out
@@ -109,6 +113,7 @@ for line in input:
             new_dir = Dir(line.split()[1],current_dir) # add directory
             #print(new_dir.name)
             current_dir.children.append(new_dir) # add directory as a child to current dir
+            all_dirs.append(new_dir)
 
         # Listed file:
         else:
@@ -131,4 +136,15 @@ def calculate_sum_of_small_dirs_sizes(root, max_size):
     return sum_of_small_dirs_sizes
 
 max_size = 100_000
-print("The sum of sizes of small directories is:", calculate_sum_of_small_dirs_sizes(root, max_size))
+
+# No duplicates:
+#print("The sum of sizes of small directories is:", calculate_sum_of_small_dirs_sizes(root, max_size))
+
+# With duplicates:
+sum_of_small_dirs_sizes = 0
+for dir in all_dirs:
+    if dir.calculate_total_size() <= max_size:
+        sum_of_small_dirs_sizes += dir.calculate_total_size()
+
+print("The sum of sizes of small directories is:", sum_of_small_dirs_sizes)
+
