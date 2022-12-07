@@ -80,9 +80,9 @@ current_dir = None
 for line in input:
     
     if line[0] == "$": # is command
-        print(line[2:3+1])
-        if line[2:3+1] == "cd": # change directory
-            print("cd")
+        #print(line)
+        if line[:3+1] == "$ cd": # change directory
+            
             if line[5] == "/": # root
                 root = Dir("root", None)
                 current_dir = root
@@ -101,7 +101,34 @@ for line in input:
         elif line[2:3+1] == "ls":
             pass
 
-        print(current_dir)
+        #print(current_dir)
     
-    else:
-        pass
+    else: # not a command, either dir or file listed after ls
+        # Listed directory:
+        if line[:2+1] == "dir":
+            new_dir = Dir(line.split()[1],current_dir) # add directory
+            #print(new_dir.name)
+            current_dir.children.append(new_dir) # add directory as a child to current dir
+
+        # Listed file:
+        else:
+            new_file = create_file(line.split()[1], int(line.split()[0]))
+            #print(new_file["name"])
+            current_dir.files.append(new_file) # add file to current dir list of files
+
+print("The total size of the root directory is:", root.calculate_total_size())
+
+# Find small directories (at or below max size)
+# Calculate the sum of total sizes of those directories
+# Recursion
+
+def calculate_sum_of_small_dirs_sizes(root, max_size):
+    sum_of_small_dirs_sizes = 0
+    for dir in root.children:
+        if dir.calculate_total_size() <= max_size:
+            sum_of_small_dirs_sizes += dir.calculate_total_size()
+        calculate_sum_of_small_dirs_sizes(dir, max_size)
+    return sum_of_small_dirs_sizes
+
+max_size = 100_000
+print("The sum of sizes of small directories is:", calculate_sum_of_small_dirs_sizes(root, max_size))
