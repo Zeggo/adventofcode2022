@@ -10,8 +10,14 @@ test_input = """30373
 33549
 35390"""
 
-input = test_input.split("\n")
+#input = test_input.split("\n")
 #print(input)
+
+input_file = open(r"08/input8.txt", encoding="utf-8")
+input = input_file.readlines()
+input_file.close()
+for i in range(len(input)):
+    input[i] = input[i].rstrip()
 
 visible_trees = 0
 
@@ -31,15 +37,19 @@ for y in range(len(input)):
             for i in range(len(input[y][:x])):
                 if input[y][x] > input[y][i]:
                     is_visible = True
-                else: is_visible = False
+                else:
+                    is_visible = False
+                    break
             if is_visible == True: direction.append("left")
 
             if is_visible == False:    
                 # Check right
-                for i in range(x, len(input[y][x+1:])):
+                for i in range(x+1, len(input[y])):
                     if input[y][x] > input[y][i]:
                         is_visible = True
-                    else: is_visible = False
+                    else:
+                        is_visible = False
+                        break
                 if is_visible == True: direction.append("right")
 
                 if is_visible == False:        
@@ -47,15 +57,19 @@ for y in range(len(input)):
                     for i in range(len(input[:y])):
                         if input[y][x] > input[i][x]:
                             is_visible = True
-                        else: is_visible = False
+                        else:
+                            is_visible = False
+                            break
                     if is_visible == True: direction.append("up")
                     
                     if is_visible == False:
                         # Check down
-                        for i in range(y, len(input[y+1:])):
+                        for i in range(y+1, len(input)):
                             if input[y][x] > input[i][x]:
                                 is_visible = True
-                            else: is_visible = False
+                            else:
+                                is_visible = False
+                                break
                         if is_visible == True: direction.append("down")
 
             if is_visible == True:
