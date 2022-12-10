@@ -34,7 +34,7 @@ for y in range(len(input)):
         else:
             is_visible = False
             # Check left
-            for i in range(len(input[y][:x])):
+            for i in range(x-1, 0-1, -1): # Starting from tree to the left
                 if input[y][x] > input[y][i]:
                     is_visible = True
                 else:
@@ -54,7 +54,7 @@ for y in range(len(input)):
 
                 if is_visible == False:        
                     # Check up
-                    for i in range(len(input[:y])):
+                    for i in range(y-1, 0-1, -1): # Starting from tree upwards
                         if input[y][x] > input[i][x]:
                             is_visible = True
                         else:
@@ -74,27 +74,14 @@ for y in range(len(input)):
 
             if is_visible == True:
                 visible_trees += 1
-                print("tree at", y, x, "is visible from", direction)
+                #print("tree at", y, x, "is visible from", direction)
 
         #print("trees when x =", x, "is:", visible_trees)
     #print("at y =", y, "there are", visible_trees)
 
 print("Total visible trees:", visible_trees)
 
-"""
-y = 3
-x = 1
+# Part 2: What is the highest scenic score for any tree?
+# Scenic score: multiplying the viewing distances in four directions
+# Viewing distance: How many trees can be seen, stopping at a tree that is the same height or taller
 
-check up:
-[0][1] => y-3, x
-[1][1]
-[2][1]
-
-
-
-
-check down:
-input[2:][1]
-
-error in y = 3, x = 1 or 3
-"""
