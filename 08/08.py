@@ -80,8 +80,3 @@ for y in range(len(input)):
     #print("at y =", y, "there are", visible_trees)
 
 print("Total visible trees:", visible_trees)
-
-# Part 2: What is the highest scenic score for any tree?
-# Scenic score: multiplying the viewing distances in four directions
-# Viewing distance: How many trees can be seen, stopping at a tree that is the same height or taller
-
